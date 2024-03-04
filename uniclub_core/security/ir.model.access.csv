@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_uniclub_core_club,uniclub_core_club,model_uniclub_core_club,base.group_user,1,1,1,1
+access_uniclub_core_club_type,uniclub_core_club_type,model_uniclub_core_club_type,base.group_user,1,1,1,1

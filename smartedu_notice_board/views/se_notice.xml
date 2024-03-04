@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        Tree view start-->
+
+        <record id="se_notice_view_tree" model="ir.ui.view">
+            <field name="name">se_notice_view_tree</field>
+            <field name="model">se.notice.board</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'done'" decoration-danger="state == 'cancel'" multi_edit="1">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="club"/>
+                    <field name="notice_type"/>
+<!--                    <field name="notice_description"/>-->
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="attachments"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+<!--    Tree view end-->
+
+<!--    form view start-->
+
+        <record id="se_notice_view_form" model="ir.ui.view">
+            <field name="name">se_notice_view_form</field>
+            <field name="model">se.notice.board</field>
+            <field name="arch" type="xml">
+                <form>
+
+<!--                status bar start-->
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" states="draft"
+                                type="object"/>
+                        <button id="button_done" name="action_done" string="Publish" class="btn-primary" states="confirm"
+                                type="object"/>
+                        <button id="button_draft" name="action_draft" string="Set To Draft" class="btn-primary" states="cancel"
+                                type="object"/>
+                        <button class="btn-danger" id="button_cancel" name="action_cancel" string="Cancel" states="draft,done,confirm"
+                                type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done,confirm"/>
+                    </header>
+<!--                status bar end-->
+
+                    <sheet>
+
+<!--                    Archive view start-->
+                        <data>
+                            <xpath expr="//sheet//group[1]" position="before">
+                                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                        attrs="{'invisible': [('active', '=', True)]}"/>
+                                <div class="oe_button_box" name="button_box">
+                                    <button type="object" name="toggle_active" class="oe_stat_button" icon="fa-archive">
+                                        <field name="active" widget="boolean_button"
+                                               options="{'terminology': 'archive'}" invisible="1"/>
+                                        <span name="active" class="o_stat_text text-success"
+                                              attrs="{'invisible': [('active', '=', False)]}">Active
+                                        </span>
+                                        <span name="active" class="o_stat_text text-danger"
+                                              attrs="{'invisible': [('active', '=', True)]}">Deactive
+                                        </span>
+                                    </button>
+                                </div>
+                            </xpath>
+                        </data>
+
+<!--                    Archive view end-->
+
+                        <div class="oe_title">
+                            <h4 class="text-primary">
+                                <field name="sequence" readonly="1"/>
+                            </h4> <br></br>
+                        </div>
+
+                        <group>
+                            <field name="name"/>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="club"/>
+                                <field name="start_date"/>
+                            </group>
+                            <group>
+                                <field name="notice_id"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+
+
+                        <group>
+                            <field name="notice_type" invisible="1"/>
+<!--                            <field name="active"/>-->
+                        </group>
+
+                        <notebook>
+
+<!--                        attachment file upload-->
+                            <page class="text-primary" name="attachments" string="Attachments">
+                                <field name="attachments" widget="many2many_binary"/>
+                            </page>
+
+<!--                        notice description-->
+                            <page class="text-primary" name="notice_description" string="Notice Descriptions">
+                                <field name="notice_description"/>
+                            </page>
+
+<!--                        note-->
+                            <page class="text-primary" name="note" string="Note">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+<!--                    chatter option-->
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+<!--    form view end-->
+
+           <record id="open_view_notice_action_1" model="ir.actions.act_window">
+            <field name="name">Notice Board</field>
+            <field name="res_model">se.notice.board</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+
+          </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+    <!--root menu-->
+        <menuitem
+                id="root_menu_uniclub_club"
+                name = "Uniclub Core"
+                sequence="99"/>
+        <!--main menu uniclub core-->
+        <menuitem parent="root_menu_uniclub_club"
+                  id="uniclub_core_club_summary_menu"
+                  sequence="103"
+                  action="action_uniclub_club_summary"
+                  name="Club Summary"/>
+        <!--main menu configuration-->
+        <menuitem parent="root_menu_uniclub_club"
+                  id="uniclub_core_configuration_menu"
+                  sequence="104"
+                  name="Configuration"/>
+        <menuitem parent="uniclub_core_configuration_menu"
+                  id="uniclub_club_menu"
+                  sequence="106"
+                  action="action_uniclub_club"
+                  name="Create New club"/>
+        <menuitem parent="uniclub_core_configuration_menu"
+                  id="uniclub_club_type_menu"
+                  sequence="107"
+                  action="action_club_type"
+                  name="Club Type"/>
+    </data>
+</odoo>
