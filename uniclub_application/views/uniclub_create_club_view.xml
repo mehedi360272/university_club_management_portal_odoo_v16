@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Kanban view-->
+        <record id="uniclub_club_kanban" model="ir.ui.view">
+            <field name="name">uniclub_create_club_kanban</field>
+            <field name="model">uniclub.create.club</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" create="false" edit="false">
+                    <field name="id" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="image"/>
+                    <templates>
+                        <h1>fuj</h1>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="o_kanban_image d-none d-md-block"
+                                     t-attf-style="background-image:url('#{kanban_image('uniclub.create.club', 'image', record.id.raw_value, placeholder)}')">
+                                </div>
+
+                                <div class="oe_kanban_details" style="padding-left: 20px">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.club_type_ids.raw_value">Club Type:
+                                            <field name="club_type_ids"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--    tree view-->
+        <record id="uniclub_create_club_tree" model="ir.ui.view">
+            <field name="name">uniclub_create_club_tree</field>
+            <field name="model">uniclub.create.club</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="club_type_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--    form view-->
+        <record id="uniclub_create_club_form" model="ir.ui.view">
+            <field name="name">uniclub_create_club_form</field>
+            <field name="model">uniclub.create.club</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_right oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="bank_account"/>
+                            </group>
+                            <group>
+                                <field name="club_type_ids"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Purpose &amp; Goal">
+                                <field name="purpose_and_goal"/>
+                            </page>
+                            <page string="Policies &amp; Guideline">
+                                <field name="rules"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_uniclub_create_club" model="ir.actions.act_window">
+            <field name="name">Clubs</field>
+            <field name="res_model">uniclub.create.club</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_uniclub_club_summary" model="ir.actions.act_window">
+            <field name="name"> </field>
+            <field name="res_model">uniclub.create.club</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <report
+            id="id_card_report"
+            model="uniclub.application"
+            string="ID Card"
+            name="uniclub_application.report"
+            file="uniclub_application.report"
+            report_type="qweb-pdf"/>
+</odoo>

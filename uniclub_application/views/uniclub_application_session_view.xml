@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Kanban view-->
+        <record id="uniclub_application_session_view_kanban" model="ir.ui.view">
+            <field name="name">uniclub_application_session_view_kanban</field>
+            <field name="model">uniclub.application.session</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_action" t-if="!selection_mode">
+
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a role="button"
+                                       class="dropdown-toggle o-no-caret btn"
+                                       data-toggle="dropdown" href="#"
+                                       aria-label="Dropdown menu"
+                                       title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable">
+                                            <a role="menuitem" type="edit"
+                                               class="dropdown-item">Edit...
+                                            </a>
+                                        </t>
+                                        <t t-if="widget.deletable">
+                                            <a role="menuitem" type="delete"
+                                               class="dropdown-item">Delete
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+
+
+                                <div t-attf-class=" o_kanban_record_has_image_fill">
+                                    <div class="o_kanban_image d-none d-md-block"
+                                         t-attf-style="background-image:url('#{kanban_image('uniclub.application.session', 'photo', record.id.raw_value, placeholder)}')">
+                                    </div>
+                                    <div class="oe_kanban_details">
+                                        <div class="oe_module_desc">
+                                            <h4 class="o_kanban_record_title">
+                                                <field name="name" modifiers="{&quot;required&quot;: true}"/>
+                                            </h4>
+                                            <p class="oe_module_name">
+                                                <field string="Club Name: " name="club_ids" modifiers="{}"/>
+                                                <p>Start Date:
+                                                    <field name="start_date" modifiers="{}"/>
+                                                </p>
+                                                <p>End Date:
+                                                    <field name="end_date" modifiers="{}"/>
+                                                </p>
+                                                <p>
+                                                    <field name="state" decoration-success="state == 'publish'"
+                                                           decoration-warning="state == 'unpublish'"
+                                                           decoration-danger="state == 'cancel'"
+                                                           decoration-info="state == 'draft'" widget="badge"
+                                                           optional="show" on_change="1"
+                                                           modifiers="{&quot;readonly&quot;: true}"/>
+                                                </p>
+                                            </p>
+
+                                            <div class="oe_module_action" t-if="!selection_mode">
+                                                <button type="object" class="btn btn-primary btn-sm"
+                                                        name="create_application" context="{'type_id':'active_id'}">
+                                                    Create New
+                                                </button>
+                                                <span/> <span/>
+                                                <button type="object" class="btn btn-info btn-sm float-right"
+                                                        name="open_new_submitted_application">
+                                                    New:
+                                                    <field name="total_new"
+                                                           modifiers="{&quot;readonly&quot;: true}"/>
+                                                </button>
+                                                <span/> <span/>
+                                                <button style="margin-top: 20px;margin-bottom: 20px;" type="object" class="btn btn-info btn-sm float-right"
+                                                        name="open_submitted_application">
+                                                    Total:
+                                                    <field name="total_application"
+                                                           modifiers="{&quot;readonly&quot;: true}"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--    tree view-->
+        <record id="uniclub_application_session_view_tree" model="ir.ui.view">
+            <field name="name">uniclub_application_session_view_tree</field>
+            <field name="model">uniclub.application.session</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="minimum_member"/>
+                    <field name="maximum_member"/>
+                    <field name="member_type"/>
+                    <field name="state" decoration-success="state == 'publish'"
+                                                           decoration-warning="state == 'unpublish'"
+                                                           decoration-danger="state == 'cancel'"
+                                                           decoration-info="state == 'draft'" widget="badge"
+                                                           optional="show" on_change="1"
+                                                           modifiers="{&quot;readonly&quot;: true}"/>
+                </tree>
+            </field>
+        </record>
+        <!--    form view-->
+        <record id="uniclub_application_session_view_form" model="ir.ui.view">
+            <field name="name">uniclub_application_session_view_form</field>
+            <field name="model">uniclub.application.session</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button id="button_publish" name="action_publish" string="Publish" class="btn-primary"
+                                states="draft"
+                                type="object"/>
+                        <button id="button_unpublish" name="action_unpublish" string="Un-Publish" class="btn-primary"
+                                states="publish"
+                                type="object"/>
+                        <button id="button_draft" name="action_draft" string="Set To Draft" class="btn-primary"
+                                states="cancel"
+                                type="object"/>
+                        <button class="btn-danger" id="button_cancel" name="action_cancel" string="Cancel"
+                                states="draft,unpublish,publish"
+                                type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,unpublish,publish"/>
+                    </header>
+                    <sheet>
+                        <field name="photo" widget="image" class="oe_right oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="minimum_member"/>
+                                <field name="maximum_member"/>
+                            </group>
+                            <group>
+                                <field name="club_ids"/>
+                                <field name="year"/>
+                                <field name="member_type"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="details"/>
+                            </page>
+                            <page string="Note">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <!--chatter-->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_uniclub_application_session" model="ir.actions.act_window">
+            <field name="name">Application Session</field>
+            <field name="res_model">uniclub.application.session</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+    </data>
+</odoo>

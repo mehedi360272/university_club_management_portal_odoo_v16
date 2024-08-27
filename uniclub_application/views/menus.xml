@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+    <!--root menu-->
+        <menuitem
+                id="root_menu_uniclub_application"
+                name = "Uniclub Application"
+                sequence="98"/>
+        <!--main menu uniclub application-->
+        <menuitem parent="root_menu_uniclub_application"
+                  id="uniclub_application_session_menu"
+                  sequence="99"
+                  action="action_uniclub_application_session"
+                  name="Application Session"/>
+
+        <menuitem parent="root_menu_uniclub_application"
+                  id="uniclub_application_club_summary_menu"
+                  sequence="100"
+                  action="action_uniclub_club_summary"
+                  name="Club Summary"/>
+
+        <!--main menu application-->
+        <menuitem parent="root_menu_uniclub_application"
+                  id="uniclub_application_menu"
+                  sequence="101"
+                  name="Application"/>
+
+        <menuitem parent="uniclub_application_menu"
+                  id="uniclub_application_all_application_menu"
+                  sequence="101"
+                  action="action_uniclub_application"
+                  name="All Application"/>
+
+        <menuitem parent="uniclub_application_menu"
+                  id="uniclub_application_confirm_application_menu"
+                  sequence="102"
+                  action="action_uniclub_application_application_conf"
+                  name="Application Confirm"/>
+
+        <menuitem parent="uniclub_application_menu"
+                  id="uniclub_application_reg_conf_menu"
+                  sequence="103"
+                  action="action_uniclub_application_registration_conf"
+                  name="Registration Confirm"/>
+
+        <!--main menu configuration-->
+        <menuitem parent="root_menu_uniclub_application"
+                  id="uniclub_application_configuration_menu"
+                  sequence="104"
+                  name="Configuration"/>
+        <!--sub menu configuration-->
+        <menuitem parent="uniclub_application_configuration_menu"
+                  id="uniclub_application_member_type_menu"
+                  sequence="108"
+                  action="action_application_member_type"
+                  name="Member Type"/>
+        <menuitem parent="uniclub_application_configuration_menu"
+                  id="uniclub_application_club_type_menu"
+                  sequence="109"
+                  action="action_club_type"
+                  name="Club Type"/>
+        <menuitem parent="uniclub_application_configuration_menu"
+                  id="uniclub_application_create_club_menu"
+                  sequence="109"
+                  action="action_uniclub_create_club"
+                  name="Create New Club"/>
+    </data>
+</odoo>
