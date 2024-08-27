@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_uniclub_application,uniclub_application,model_uniclub_application,base.group_user,1,1,1,1
-access_uniclub_application_member_type,uniclub_application_member_type,model_uniclub_application_member_type,base.group_user,1,1,1,1
-access_uniclub_application_session,uniclub_application_session,model_uniclub_application_session,base.group_user,1,1,1,1
