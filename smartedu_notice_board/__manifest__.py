@@ -9,8 +9,9 @@
      other information.
      It facilitates communication and ensures that everyone stays informed and up-to-date.
      """,
+    'author': 'Khondokar Md. Mehedi Hasan',
     'category': 'Notice',
-    'website': 'https://www.google.com',
+    'website': 'https://github.com/mehedi360272',
     'images': [],
     'depends': [
         'base',
